@@ -22,12 +22,12 @@ export const AccountSlide = createSlice({
   reducers: {
     doLoginAction: (state ,action) => {
       state.isAuthenticated =  true ;
-      state.user = action.payload 
+      state.user = action.payload.user 
     },
     
     doGetAccountAction: (state ,action) => {
         state.isAuthenticated =  true ;
-        state.user = action.payload 
+        state.user = action.payload.user 
       },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,

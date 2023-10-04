@@ -18,8 +18,22 @@ const Layout = ()=> {
   return (
     <>
     <div className="layout-app"></div>
-  
-       <Outlet />
+      <Header />
+      <Outlet />
+      <Footer />
+    </>
+  )
+}
+const LayoutAdmin = ()=> {
+    const isAdminRoute = window.location.pathname.startsWith('/admin') // xác nhận có vào trang admin không
+    const user = useSelector(state => state.account.user) 
+    const userRole = user.role
+  return (
+    <>
+    <div className="layout-app"></div>
+     {isAdminRoute && userRole === 'ADMIN' && <Header/>}
+      <Outlet />
+     {isAdminRoute && userRole === 'ADMIN' && <Footer/>}
       
     </>
   )
@@ -29,7 +43,11 @@ export default function App(){
   const dispatch = useDispatch()
   const isAuthenticated = useSelector(state => state.account.isAuthenticated)
   const getAccount = async () => {
-    if(window.location.pathname === '/login' ) return ;
+    if(window.location.pathname === '/login' 
+      || window.location.pathname === '/register'
+      || window.location.pathname === '/'
+    
+    ) return ;
     const res = await callFetchAccount()
     if(res && res.data){
       dispatch(doGetAccountAction(res.data))
@@ -58,7 +76,7 @@ export default function App(){
 
     {
       path: "/admin",
-      element: <Layout />,
+      element: <LayoutAdmin/>,
       errorElement : <NotFound/>  ,
       children: [
         {index : true  , element :
@@ -80,7 +98,9 @@ export default function App(){
   ]);
   return(
     <>
-    {isAuthenticated === true || window.location.pathname === '/login' ?
+    {isAuthenticated === true || window.location.pathname === '/login' ||
+    window.location.pathname === '/register'||
+    window.location.pathname === '/' ?
       <RouterProvider router={router} />
       :
       <Loading />
