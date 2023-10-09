@@ -1,10 +1,10 @@
 
 import { Button, Checkbox, Form, Input ,message } from 'antd';
-import "./Register.scss"
+
 import { useNavigate } from 'react-router-dom';
 import {callRegister} from "../../services/api"   
 import { useState } from 'react';
-
+import { Link } from 'react-router-dom';
 
 const Register = () => {
     const navigate = useNavigate()
@@ -26,7 +26,7 @@ const Register = () => {
     };
     
    return (
-    <div className='form-register'>
+    <div className='form-register' style={{marginTop : 80}}>
     <Form
         name="basic"
         labelCol={{
@@ -119,6 +119,8 @@ const Register = () => {
                 Submit
             </Button>
         </Form.Item>
+        <hr />
+      <span>Đã có tài khoản ? <Link to={"/login"}>Đăng nhập</Link>  </span>
     </Form>
     </div>
    )

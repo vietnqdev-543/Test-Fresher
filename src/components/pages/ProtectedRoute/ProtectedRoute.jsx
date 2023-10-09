@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { Navigate } from "react-router-dom"
-import Notpermitted from "../Notpermitted/Notpermitted"
+import Notpermitted from "../../Notpermitted/Notpermitted"
 const RoleBaseRoute= ()=>{
     const isAdminRoute = window.location.pathname.startsWith('/admin') // xác nhận có vào trang admin không
     const user = useSelector(state => state.account.user) 

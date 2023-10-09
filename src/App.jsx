@@ -5,22 +5,28 @@ import Footer from "./components/layout/footer/Footer"
 import { Outlet } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Register from "./components/pages/register/Register";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { callFetchAccount } from "./components/services/api";
 import { useDispatch, useSelector } from "react-redux";
 import { doGetAccountAction } from "./redux/account/accountSlice";
 import Loading from "./components/loading/Loading";
 import NotFound from "./components/pages/NotFound/NotFound";
-import AdminPage from "./components/pages/admin/admin";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import AdminPage from "./components/pages/admin/AdminPage";
+import ProtectedRoute from "./components/pages/ProtectedRoute/ProtectedRoute";
+
+
+
 
 const Layout = ()=> {
+  const isAuthenticated = useSelector (state => state.account.isAuthenticated )
   return (
     <>
     <div className="layout-app"></div>
-      <Header />
-      <Outlet />
+
+     {isAuthenticated ? <Header /> : null}
+      <Outlet /> 
       <Footer />
+     
     </>
   )
 }
@@ -41,11 +47,11 @@ const LayoutAdmin = ()=> {
 
 export default function App(){
   const dispatch = useDispatch()
-  const isAuthenticated = useSelector(state => state.account.isAuthenticated)
+ 
+  const isLoading = useSelector(state => state.account.isLoading)
   const getAccount = async () => {
     if(window.location.pathname === '/login' 
       || window.location.pathname === '/register'
-      || window.location.pathname === '/'
     
     ) return ;
     const res = await callFetchAccount()
@@ -53,6 +59,7 @@ export default function App(){
       dispatch(doGetAccountAction(res.data))
     }
   }
+  
   useEffect(()=>{
     getAccount()
   }, [])
@@ -98,11 +105,13 @@ export default function App(){
   ]);
   return(
     <>
-    {isAuthenticated === true || window.location.pathname === '/login' ||
-    window.location.pathname === '/register'||
-    window.location.pathname === '/' ?
+    {isLoading === false 
+    ||window.location.pathname === '/login' 
+    ||window.location.pathname === '/register'
+    ||window.location.pathname === '/'
+    ?
       <RouterProvider router={router} />
-      :
+    :
       <Loading />
     }
   

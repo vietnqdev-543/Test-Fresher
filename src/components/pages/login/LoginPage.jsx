@@ -30,7 +30,7 @@ const LoginPage = () => {
     console.log('Success:', values);
   };
   return (
-    <div className="form-login">
+    <div className="form-login" style={{marginTop : 80}}>
     
     <Form
       name="basic"
