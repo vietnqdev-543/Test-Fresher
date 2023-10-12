@@ -21,7 +21,7 @@ const Header = () => {
     if (res && res.data){
       dispatch(doLogoutAction());
       message.success("Đăng xuất thành công")
-      navigate ("/login")
+      navigate ("/")
     }
   }
   const items = [
@@ -52,7 +52,7 @@ const Header = () => {
               <Link to={"/"}>Home</Link>
             </div>
             <div className="nav-menu-item">
-              <Link to={""}>Product</Link>
+              <Link to={"/product"}>Product</Link>
             </div>
             <div className="nav-menu-item">
               <Link to={""}>Service</Link>

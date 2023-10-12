@@ -13,37 +13,48 @@ import Loading from "./components/loading/Loading";
 import NotFound from "./components/pages/NotFound/NotFound";
 import AdminPage from "./components/pages/admin/AdminPage";
 import ProtectedRoute from "./components/pages/ProtectedRoute/ProtectedRoute";
-
+import Product from "./components/pages/Product/Product";
+import UserPage from "./components/pages/admin/UserManage/UserManage";
+import BookPage from "./components/pages/admin/BookManage";
+import LayoutAdmin from "./components/pages/admin/LayoutAdmin";
+import UserManage from "./components/pages/admin/UserManage/UserManage";
+import BookManage from "./components/pages/admin/BookManage";
+import OrderManage from "./components/pages/admin/OrderManage";
 
 
 
 const Layout = ()=> {
   const isAuthenticated = useSelector (state => state.account.isAuthenticated )
+  const isLoginRoute = window.location.pathname.startsWith("/login")
   return (
     <>
     <div className="layout-app"></div>
 
-     {isAuthenticated ? <Header /> : null}
+     {/* {isAuthenticated ? <Header /> : null} */}
+     {isLoginRoute ? null : <Header />}
+     {/* <Header /> */}
       <Outlet /> 
       <Footer />
      
     </>
   )
 }
-const LayoutAdmin = ()=> {
-    const isAdminRoute = window.location.pathname.startsWith('/admin') // xác nhận có vào trang admin không
-    const user = useSelector(state => state.account.user) 
-    const userRole = user.role
-  return (
-    <>
-    <div className="layout-app"></div>
-     {isAdminRoute && userRole === 'ADMIN' && <Header/>}
-      <Outlet />
-     {isAdminRoute && userRole === 'ADMIN' && <Footer/>}
+// const LayoutAdmin = ()=> {
+//     const isAdminRoute = window.location.pathname.startsWith('/admin') // xác nhận có vào trang admin không
+//     const user = useSelector(state => state.account.user) 
+//     const userRole = user.role
+//   return (
+//     <>
+//     <div className="layout-app"></div>
+//       {/* {isAdminRoute && userRole === 'ADMIN' && <Header/>}  */}
+//      {isAdminRoute && userRole === 'ADMIN' ? null :<Header />}
+//       <Outlet />
+//      {isAdminRoute && userRole === 'ADMIN' && <Footer/>}
       
-    </>
-  )
-}
+//     </>
+//   )
+// }
+<LayoutAdmin/>
 
 export default function App(){
   const dispatch = useDispatch()
@@ -52,7 +63,7 @@ export default function App(){
   const getAccount = async () => {
     if(window.location.pathname === '/login' 
       || window.location.pathname === '/register'
-    
+      
     ) return ;
     const res = await callFetchAccount()
     if(res && res.data){
@@ -77,6 +88,10 @@ export default function App(){
         {
           path : "register" ,
           element : <Register />
+        },
+        {
+          path : "product" ,
+          element : <Product />   
         }
       ],
     },
@@ -93,11 +108,15 @@ export default function App(){
           } ,
         {
           path: "user",
-          element: <LoginPage />,
+          element: <UserManage />,
         },
         {
           path : "book" ,
-          element : <Register />
+          element : <BookManage />
+        },
+        {
+          path : "order" ,
+          element :  <OrderManage />
         }
       ],
     },
@@ -107,7 +126,7 @@ export default function App(){
     <>
     {isLoading === false 
     ||window.location.pathname === '/login' 
-    ||window.location.pathname === '/register'
+    ||window.location.pathname === '/register' 
     ||window.location.pathname === '/'
     ?
       <RouterProvider router={router} />
