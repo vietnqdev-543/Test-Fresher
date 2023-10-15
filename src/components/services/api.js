@@ -16,3 +16,7 @@ export const callLogin = (username , password)=> {
    //current : current=1&pageSize=2
    return axios.get(`/api/v1/user?${query}`)
  }
+
+ export const callCreateAUser = (fullName , password , email ,phone) => {
+   return axios.post('/api/v1/user' , {  fullName , password ,email , phone})
+ }

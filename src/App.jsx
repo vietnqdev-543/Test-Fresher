@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { doGetAccountAction } from "./redux/account/accountSlice";
 import Loading from "./components/loading/Loading";
 import NotFound from "./components/pages/NotFound/NotFound";
-import AdminPage from "./components/pages/admin/AdminPage";
+import AdminPage from "./components/pages/admin/DashBoard/AdminPage";
 import ProtectedRoute from "./components/pages/ProtectedRoute/ProtectedRoute";
 import Product from "./components/pages/Product/Product";
 import UserPage from "./components/pages/admin/UserManage/UserManage";
@@ -24,7 +24,6 @@ import OrderManage from "./components/pages/admin/OrderManage";
 
 
 const Layout = ()=> {
-  const isAuthenticated = useSelector (state => state.account.isAuthenticated )
   const isLoginRoute = window.location.pathname.startsWith("/login")
   return (
     <>
@@ -39,21 +38,7 @@ const Layout = ()=> {
     </>
   )
 }
-// const LayoutAdmin = ()=> {
-//     const isAdminRoute = window.location.pathname.startsWith('/admin') // xác nhận có vào trang admin không
-//     const user = useSelector(state => state.account.user) 
-//     const userRole = user.role
-//   return (
-//     <>
-//     <div className="layout-app"></div>
-//       {/* {isAdminRoute && userRole === 'ADMIN' && <Header/>}  */}
-//      {isAdminRoute && userRole === 'ADMIN' ? null :<Header />}
-//       <Outlet />
-//      {isAdminRoute && userRole === 'ADMIN' && <Footer/>}
-      
-//     </>
-//   )
-// }
+
 <LayoutAdmin/>
 
 export default function App(){
@@ -103,7 +88,7 @@ export default function App(){
       children: [
         {index : true  , element :
           <ProtectedRoute >
-            <AdminPage />
+            <AdminPage /> 
           </ProtectedRoute>
           } ,
         {
@@ -117,6 +102,10 @@ export default function App(){
         {
           path : "order" ,
           element :  <OrderManage />
+        }, 
+        {
+          path : 'home' ,
+          element : <Home />
         }
       ],
     },

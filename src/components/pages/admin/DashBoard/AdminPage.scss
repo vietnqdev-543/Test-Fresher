@@ -1,0 +1,50 @@
+.dashboard-app {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: minmax(200px , auto);
+    column-gap: 20px;
+    row-gap: 20px;
+    grid-template-areas: 'aa aa aa aa bb cc'        
+                        'dd dd dd dd ee ff'
+                        'dd dd dd dd gg gg'
+                        'hh hh ii ii jj jj'
+                        'hh hh ii ii jj jj'
+                        ;
+  
+    .item {
+      background-color: red;
+      border: none;
+      border-radius: 5px;
+      
+    }
+  
+    .item1 {
+      grid-area: aa;
+    }
+  
+    .item2 {
+      grid-area: bb;
+    }
+  
+    .item3 {
+      grid-area: cc;
+    }
+  
+    .item4 {
+      grid-area: dd;
+    }
+  
+    .item5 {
+      grid-area: ee;
+    }
+  
+    .item6 {
+      grid-area: ff;
+    }
+    .item7{grid-area: gg;}
+    .item8{grid-area: hh;}
+    .item9{grid-area: ii;}
+    .item10{grid-area: jj;}
+
+  }
+  

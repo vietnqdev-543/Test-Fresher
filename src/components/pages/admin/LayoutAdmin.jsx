@@ -1,10 +1,19 @@
 
 import { Outlet } from 'react-router-dom'
-import { AppstoreOutlined, } from '@ant-design/icons';
-import { Menu } from 'antd';
+import { Menu, message } from 'antd';
 import "./LayoutAdmin.scss"
-import { useSelector } from 'react-redux';
+import { useSelector , useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { MdDashboard } from "react-icons/md"
+import { FaUserCircle } from 'react-icons/fa'
+import { DownOutlined,UserOutlined } from '@ant-design/icons';
+import { Dropdown,  Avatar } from 'antd';
+import { callLogout } from '../../services/api';
+import { useNavigate } from 'react-router-dom';
+import { doLogoutAction } from '../../../redux/account/accountSlice';
+import {FiSearch} from "react-icons/fi"
+import { AiFillGithub , AiOutlineBell } from 'react-icons/ai';
+import {BsSun} from "react-icons/bs"
 function getItem(label, key, icon, children, type) {
   return {
     key,
@@ -18,23 +27,26 @@ function getItem(label, key, icon, children, type) {
 
 
 const items = [
-  getItem('', 'sub1 ', <Link to="/admin">DashBoard</Link>),
+  getItem('', 'sub1 ', <Link to="/admin"> <span className='nav-icon'><MdDashboard /></span> DashBoard</Link>),
   {
     type: 'divider',
   },
-  getItem('Manage User ', 'sub2', <AppstoreOutlined />, [
+  getItem('Manage User ', 'sub2', <span className='nav-icon'> <FaUserCircle /></span>, [
     getItem('', '1', <Link to="/admin/user">CRUD</Link>),
     getItem('Files', '2'),
   ]),
   {
     type: 'divider',
   },
-  getItem('', '3', <Link to="/admin/book">Manage Books</Link>),
+  getItem('', '3', <Link to="/admin/book">Products</Link>),
   getItem('', '4', <Link to="/admin/order"> Manage Orders</Link>),
+
 ];
+
+
+
+
 const LayoutAdmin = () => {
-
-
 
   const onClick = (e) => {
     console.log('click ', e);
@@ -42,23 +54,33 @@ const LayoutAdmin = () => {
 
 
   const userName = useSelector(state => state.account.user.fullName)
+  const user = useSelector(state => state.account.user)
+  const urlAvatar = `${import.meta.env.VITE_BACKEND_URL}/images/avatar/${user?.avatar}`
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const handleLogout = async() => {
+    const res = await callLogout();
+    if (res && res.data){
+      dispatch(doLogoutAction());
+      message.success("Đăng xuất thành công")
+      navigate('/login')
+    }
+  }
+  const handleHome = () => {
+    message.success("chuyển sang trang home")
+    navigate("/")
+  }
   return (
     <div className="container">
-        <div className="header">
-          <div className="header-aside item">
-            <h3 className='title'>ADMIN</h3>
-          </div>
-          <div className="header-content item">
-          {userName}
-          </div>
-        </div>
-       
       <div className="layout-app">
         <div className="aside item">
+          <div className="aside-header">
+            <h2 style={{ fontSize : '30px' , color : '#696cff' }}>Glasses Store</h2>
+          </div>
           <Menu
             onClick={onClick}
             style={{
-              width: 256,
+              width: '100%',
             }}
             defaultSelectedKeys={['1']}
             defaultOpenKeys={['sub1']}
@@ -67,7 +89,44 @@ const LayoutAdmin = () => {
           />
         </div>
         <div className="content item">
-          <Outlet />
+          <div className="content-header">
+          <div className='header-search'>
+            <FiSearch  className='icon'/>
+             <div >Search</div>
+          </div>
+            <div className="header-right">
+              <AiFillGithub  className='icon-link-item'/>
+              <AiOutlineBell  className='icon-link-item'/>
+              <BsSun  className='icon-link-item'/>
+              <Dropdown
+                menu={
+                  <Menu>
+                    <Menu.Item key="1">
+                      <Link to="/account">Quản lý tài khoản</Link>
+                    </Menu.Item>
+                    <Menu.Item key="2">
+                      <a onClick={handleHome}>Trang chủ</a>
+                    </Menu.Item>
+                    <Menu.Item key="3">
+                    <a onClick={handleLogout} >Đăng xuất</a>
+                    </Menu.Item>
+                  </Menu>
+                }
+              >
+                <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+                <div className="header-username">
+                 <Avatar className='header-avatar' src={urlAvatar} icon={<UserOutlined />} />
+                  <span className='header-name'>{userName}</span> <DownOutlined />
+                </div>
+                </a>
+              </Dropdown>
+
+            </div>
+          </div>
+          <div className="content-app">
+            <Outlet />
+          
+          </div>
         </div>
       </div>
     </div>

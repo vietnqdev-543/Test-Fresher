@@ -1,5 +1,6 @@
 
 import { Form, Row, Col, Input, Button} from 'antd'
+import './style.scss'
 const InputSearch = (props) => {
 
 
@@ -22,7 +23,7 @@ const InputSearch = (props) => {
   }
   return (
     <>
-      <Form name='advance_search' onFinish={onFinish} style={{ backgroundColor: "#fafafa", padding: '30px', borderRadius: "5px", marginBottom: '30px' }}>
+      <Form name='advance_search' onFinish={onFinish} style={{ backgroundColor: "white", padding: '30px', borderRadius: "5px", marginBottom: '30px' }}>
         <Row gutter={24}>
           <Col span={8}>
             <Form.Item
@@ -55,19 +56,10 @@ const InputSearch = (props) => {
             </Form.Item>
           </Col>
 
-          <Col span={21}></Col>
-          <Col >
-            <Form.Item>
-              <Button type="primary" htmlType="submit">
-                Search
-              </Button>
-            </Form.Item>
-          </Col>
-          <Col >
-            <Form.Item>
-              <Button htmlType="reset">Clear</Button>
-            </Form.Item>
-          </Col>
+         <div  className='btn-search'>
+              <button className='btn-primary' style={{marginRight : '20px'}} type="primary" htmltype="submit">Search</button>
+              <button className='btn-second' htmltype="reset">Clear</button>
+          </div>
         </Row>
       </Form>
 

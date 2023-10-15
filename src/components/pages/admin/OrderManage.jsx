@@ -1,8 +1,11 @@
 import React from 'react'
 
-const OrderManage = () => {
+const OrderManage = ({handleTest}) => {
+
   return (
-    <div>Order</div>
+    <div>
+
+    </div>
   )
 }
 
