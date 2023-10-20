@@ -1,12 +1,11 @@
 import { Button, Modal, Checkbox, Form, Input, Divider, message, notification } from 'antd';
 import { callCreateAUser } from '../../../services/api';
-const ModalCreateUser = ({ isModalOpen, showModal, handleOk, handleCancel ,fetchUser }) => {
+const ModalCreateUser = ({ isModalOpen, handleOk, handleCancel ,fetchUser }) => {
     const [form] = Form.useForm()
    
 
     const onFinish = async (values) => {
         const { fullName, password, email, phone } = values;
-        try {
           const res = await callCreateAUser(fullName, password, email, phone);
           if (res && res.data) {
             message.success('Thêm tài khoản thành công');
@@ -27,13 +26,7 @@ const ModalCreateUser = ({ isModalOpen, showModal, handleOk, handleCancel ,fetch
               });
             }
           }
-        } catch (error) {
-          // Xử lý lỗi trong trường hợp request không thành công
-          notification.error({
-            message: 'Đã có lỗi xảy ra',
-            description: 'Không thể kết nối tới máy chủ.',
-          });
-        }
+        
       };
       
     
@@ -43,7 +36,14 @@ const ModalCreateUser = ({ isModalOpen, showModal, handleOk, handleCancel ,fetch
 
             <Modal title="Tạo mới người dùng" open={isModalOpen} onOk={()=> { form.submit() }} onCancel={handleCancel} okText={'Tạo mới'} cancelText={'Hủy bỏ'}>
             <Divider />
-                <Form form = {form} name="basic" labelCol={{ span: 24, }} wrapperCol={{ span: 24, }} initialValues={{ remember: true, }} onFinish={onFinish}  autoComplete="off" >
+                <Form 
+                    form = {form} 
+                    name="basic" 
+                    labelCol={{ span: 24, }} 
+                    wrapperCol={{ span: 24, }} 
+                    initialValues={{ remember: true, }}
+                    onFinish={onFinish}  
+                    autoComplete="off" >
 
                     <Form.Item label="Tên hiển thị" name="fullName"
                         rules={[

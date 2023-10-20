@@ -1,57 +1,54 @@
 .header-container{
     width: 100%;
     height: 60px;
-   display: grid;
-   grid-template-columns: 20% 50% 30%;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
+    padding: 0 40px;
     .header-item{
         display: flex;
-    }
-    .nav-logo{
-        font-size: 30px;
-        padding:0 40px;
-        font-weight: bolder;
-    }
-
-    .nav-menu{
-        display: flex;
-        margin-left: 300px;
-        .nav-menu-item {
-            padding: 0 10px;
-            a{
-                font-size: 20px;
-                color: black;
-                text-decoration: none;
-            }
-        }
-    }
-
-    .nav-SearchBar input{
-        padding:10px 20px;
-        border-radius: 10px;
-        width: 200px;
-        margin: 0 10px;
-    }
-    .nav-cart{
-        font-size: 30px;
-    }
-    .nav-user{
-        margin : 0 10px;
-        padding: 5px 20px;
-        cursor: pointer;
-        .nav-userName{
-            font-size: 20px;
-            color: black;
+        justify-content: center;
+        align-items: center;
+        .nav-logo{
+            font-size: 30px;
+            padding:0 40px;
             font-weight: bolder;
         }
-        .nav-link{
+        .nav-menu{
             display: flex;
-            a{
-                padding: 10px;
-                text-decoration: none;
+            .nav-menu-item {
+                padding: 0 10px;
+                a{
+                    font-size: 20px;
+                    color: black;
+                    text-decoration: none;
+                }
+            }
+        }
+        .nav-cart{
+            font-size: 30px;
+        }
+        .nav-user{
+            margin : 0 10px;
+            padding: 5px 20px;
+            cursor: pointer;
+            .nav-userName{
                 font-size: 20px;
+                color: black;
+                font-weight: bolder;
+            }
+            .nav-link{
+                display: flex;
+                a{
+                    padding: 10px;
+                    text-decoration: none;
+                    font-size: 20px;
+                }
             }
         }
     }
+
+
+   
 }

@@ -1,16 +1,14 @@
 import { useSelector } from "react-redux"
 import "./Header.scss"
-import { Link } from "react-router-dom"
 import { BsMinecart } from 'react-icons/bs';
-import { DownOutlined } from '@ant-design/icons';
-import { Dropdown, Space } from 'antd';
-import { doLogoutAction } from "../../../redux/account/accountSlice";
-import { message } from "antd";
-import { useNavigate} from "react-router-dom";
-import { callLogout } from "../../services/api";
+import { Avatar, Dropdown, Space, message } from 'antd';
+
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { UserOutlined } from '@ant-design/icons';
-import { Avatar } from 'antd';
+import { UserOutlined, DownOutlined } from "@ant-design/icons";
+import { doLogoutAction } from "../../../redux/account/accountSlice";
+import { callLogout } from "../../services/api";
+
 const Header = () => {
   const isAuthenticated = useSelector(state => (state.account.isAuthenticated))
   const userFullname = useSelector(state => state.account.user.fullName)
@@ -18,12 +16,12 @@ const Header = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const handlelogout = async() => {
+  const handlelogout = async () => {
     const res = await callLogout();
-    if (res && res.data){
+    if (res && res.data) {
       dispatch(doLogoutAction());
       message.success("Đăng xuất thành công")
-      navigate ("/")
+      navigate("/")
     }
   }
   const items = [
@@ -35,46 +33,35 @@ const Header = () => {
       type: 'divider',
     },
     {
-      label: <label   onClick={() => handlelogout()}> Đăng xuất</label>  ,
+      label: <label onClick={() => handlelogout()}> Đăng xuất</label>,
       key: 'logout',
     },
   ];
-
-  const user = useSelector(state => state.account.user)
-  const urlAvatar = `${import.meta.env.VITE_BACKEND_URL}/images/avatar/${user?.avatar}`
 
   return (
     <>
       <div className="header-container">
 
-
-        <div className="header-item">
-        <div className="nav-logo">PRODIGY</div>
-
-          <div className="nav-menu">
-            <div className="nav-menu-item">
-              <Link to={"/"}>Home</Link>
-            </div>
-            <div className="nav-menu-item">
-              <Link to={"/product"}>Product</Link>
-            </div>
-            <div className="nav-menu-item">
-              <Link to={""}>Service</Link>
-            </div>
+        <div className="header-item-nav">
+          <div className="nav-logo">Logo</div>
+          <div className="nav-menu-item">
+            <Link to={"/"}>Home</Link>
+          </div>
+          <div className="nav-menu-item">
+            <Link to={"/product"}>Product</Link>
+          </div>
+          <div className="nav-menu-item">
+            <Link to={""}>Service</Link>
           </div>
         </div>
 
 
+
+
         <div className="header-item">
-        
-
-          <div className="nav-cart">
-            <BsMinecart size={30} />
-          </div>
-
           <div className="nav-user">
             {isAuthenticated === true ? (
-              <div className="nav-userName" > 
+              <div className="nav-userName" >
                 <Dropdown
                   menu={{
                     items,
@@ -83,8 +70,8 @@ const Header = () => {
                 >
                   <a onClick={(e) => e.preventDefault()}>
                     <Space>
-                    <Avatar src={urlAvatar} icon={<UserOutlined />} />
-                    {userFullname} 
+                      <Avatar size='small' icon={<UserOutlined />} />
+                      {userFullname}
                       <DownOutlined />
                     </Space>
                   </a>

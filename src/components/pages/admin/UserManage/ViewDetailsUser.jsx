@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Drawer, Descriptions, Badge } from 'antd';
 const ViewDetailsUser = ({ openViewDetail, dataViewDetail , onClose }) => {
-
     return (
         <>
             <Drawer title="Xem chi tiết tài khoản người dùng" width={'40%'} placement="right" onClose={onClose} open={openViewDetail}>

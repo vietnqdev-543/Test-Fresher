@@ -1,14 +1,26 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
+import App from './App.jsx';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
-import './main.scss'
-ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+import './main.scss';
+import { ConfigProvider } from 'antd';
 
-  /* </React.StrictMode> */
-)
+
+const root = createRoot(document.getElementById('root'));
+
+root.render(
+  <Provider store={store}>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#696cff',
+          borderRadius: 6,
+        },
+      }}
+    >
+      <App />
+    </ConfigProvider>
+  </Provider>
+);

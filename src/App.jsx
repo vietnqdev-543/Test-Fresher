@@ -1,25 +1,27 @@
 import {createBrowserRouter,RouterProvider,} from "react-router-dom";
-import LoginPage from "./components/pages/login/LoginPage"
-import Header from "./components/layout/header/Header"
-import Footer from "./components/layout/footer/Footer"
 import { Outlet } from "react-router-dom";
-import Home from "./components/Home/Home";
-import Register from "./components/pages/register/Register";
+import ProtectedRoute from "./components/pages/ProtectedRoute/ProtectedRoute";
 import { useEffect, useState } from "react";
+import Header from "./components/layout/header/Header";
+import Footer from './components/layout/footer/Footer'
+import Home from './components/Home/Home'
+import LoginPage from "./components/pages/Login/LoginPage"
+import Register from "./components/pages/Register/Register";
 import { callFetchAccount } from "./components/services/api";
 import { useDispatch, useSelector } from "react-redux";
 import { doGetAccountAction } from "./redux/account/accountSlice";
 import Loading from "./components/loading/Loading";
 import NotFound from "./components/pages/NotFound/NotFound";
-import AdminPage from "./components/pages/admin/DashBoard/AdminPage";
-import ProtectedRoute from "./components/pages/ProtectedRoute/ProtectedRoute";
-import Product from "./components/pages/Product/Product";
-import UserPage from "./components/pages/admin/UserManage/UserManage";
-import BookPage from "./components/pages/admin/BookManage";
-import LayoutAdmin from "./components/pages/admin/LayoutAdmin";
+
+import Product from './components/pages/Product/Product'
+import AdminPage from './components/pages/admin/DashBoard/AdminPage'
+import LayoutAdmin from './components/pages/admin/LayoutAdmin'
+
+
+import BookManage from './components/pages/admin/BookManage/BookManage'
+import OrderManage from "./components/pages/admin/OrderManage/OrderManage";
 import UserManage from "./components/pages/admin/UserManage/UserManage";
-import BookManage from "./components/pages/admin/BookManage";
-import OrderManage from "./components/pages/admin/OrderManage";
+import UserDisable from "./components/pages/admin/UserManage/UserDisable";
 
 
 
@@ -27,11 +29,8 @@ const Layout = ()=> {
   const isLoginRoute = window.location.pathname.startsWith("/login")
   return (
     <>
-    <div className="layout-app"></div>
-
-     {/* {isAuthenticated ? <Header /> : null} */}
+    <div className="layout-app"></div>  
      {isLoginRoute ? null : <Header />}
-     {/* <Header /> */}
       <Outlet /> 
       <Footer />
      
@@ -59,6 +58,8 @@ export default function App(){
   useEffect(()=>{
     getAccount()
   }, [])
+  const [disabledUsers, setDisabledUsers] = useState([]);
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -93,7 +94,11 @@ export default function App(){
           } ,
         {
           path: "user",
-          element: <UserManage />,
+          element: <UserManage />
+        },
+        {
+          path: "userDisable",
+          element: <UserDisable />
         },
         {
           path : "book" ,
@@ -102,15 +107,13 @@ export default function App(){
         {
           path : "order" ,
           element :  <OrderManage />
-        }, 
-        {
-          path : 'home' ,
-          element : <Home />
         }
+        
       ],
     },
    
   ]);
+
   return(
     <>
     {isLoading === false 

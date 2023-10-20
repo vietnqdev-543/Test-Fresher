@@ -1,26 +1,26 @@
 import { useEffect, useState } from 'react'
 import {  Table , Button , Popconfirm, message, notification } from 'antd';
-import { callDeleteAUser, callFetchListUser } from '../../../services/api';
-import "./style.scss"
-import InputSearch from './InputSearch';
+import { callDeleteAUser, callFetchListBook } from '../../../services/api';
 import { ReloadOutlined } from '@ant-design/icons';
-import ModalCreateUser from './ModalCreateUser';
 import { PlusOutlined , CloudDownloadOutlined ,EditOutlined , DeleteOutlined ,EyeOutlined} from '@ant-design/icons';
-import ViewDetailsUser from './ViewDetailsUser';
-import ModalUpdateUser from './ModalUpdateUser';
+import ModalUpdateUser from '../UserManage/ModalUpdateUser';
 import * as XLSX from 'xlsx';
 import moment from 'moment';
+import ViewDetailsBook from './ViewDetailsBook';
+import InputSearchBook from './InputSearchBook';
+import ModalCreateBook from './ModalCreateBook';
+import ModalUpdateBook from './ModalUpdateBook';
 
 
 const UserManage = () => {
   const [listUser , setListUser] = useState([])
   const [current,  setCurrent]= useState(1) // lưu lại trạng thái của table đang ở trang bao nhiêu
-  const [pageSize , setPageSize] = useState(4) // lấy bao nhiêu phần tử 1 lần (table hiển thị bao nhiêu phần tử)
+  const [pageSize , setPageSize] = useState(6) // lấy bao nhiêu phần tử 1 lần (table hiển thị bao nhiêu phần tử)
   const [total , setTotal] = useState (0) 
 
   //drawer view details
   const [openViewDetail , setOpenViewDetail] = useState(false)
-  const [dataViewDetail , setDataViewDatail] =useState ("")
+  const [dataViewDetail , setDataViewDetail] =useState ([])
 
   useEffect(()=> {
     fetchUser();
@@ -32,20 +32,12 @@ const UserManage = () => {
     if(searchFilter){
       query += `&${searchFilter}`
     }
-    const res = await callFetchListUser(query)
+    const res = await callFetchListBook(query)
      if(res && res.data){
        setListUser(res.data.result);
        setTotal(res.data.meta.total)
     }
   }
-
-  const showDrawer = () => {
-    setOpenViewDetail(true);
-};
-  const onClose = () => {
-    setOpenViewDetail(false);
-  };
- 
 
   const columns = [
     {
@@ -53,24 +45,28 @@ const UserManage = () => {
       dataIndex: '_id',
     },
     {
-      title: 'Tên hiển thị',
-      dataIndex: 'fullName',
+      title: 'Tên sách',
+      dataIndex: 'mainText',
       sorter : true 
     },
     {
-      title: 'Email',
-      dataIndex: 'email',
+      title: 'Thể loại',
+      dataIndex: 'category',
       sorter : true 
     },
     {
-      title : 'số điện thoại',
-      dataIndex : 'phone',
+      title : 'Tác giả',
+      dataIndex : 'author' ,
       sorter : true 
     }, 
     {
-      title : 'Role User',
-      dataIndex : 'role'
-    },  
+      title: 'Giá tiền',
+      dataIndex: 'price',
+      width: 120,
+      render: (text, record) => (
+        <span>{record.price} VND</span>
+      ),
+    },
     {
       title : 'Ngày cập nhật',
       render: (text, record) => moment(record.updatedAt).format('HH:mm:ss DD-MM-YYYY') ,
@@ -93,7 +89,7 @@ const UserManage = () => {
               <DeleteOutlined  style={{ paddingRight : 10, fontSize: 20 , cursor : 'pointer'}} />
             </Popconfirm>
             <EditOutlined onClick={()=>{showModalUpdateUser() ; setDataUpdate(record)}} style={{ paddingRight : 10, fontSize: 20}} />
-            <EyeOutlined  style={{ fontSize: 20}}  onClick={()=> {setDataViewDatail(record ) , setOpenViewDetail(true) }}  />
+            <EyeOutlined  style={{ fontSize: 20}}  onClick={()=> {setDataViewDetail(record ) , setOpenViewDetail(true) }}  />
             </div>
             
           </>
@@ -102,6 +98,11 @@ const UserManage = () => {
     },
     
   ];
+
+  const showDrawer = () => {
+    setOpenViewDetail(true);
+    console.log(dataViewDetail(record));
+};
 
   const onChange = (pagination, filters, sorter, extra) => {
     if(pagination && pagination.current !== current){
@@ -129,7 +130,7 @@ const UserManage = () => {
     }
   }
 
-  //Modal add user
+  //Modal add book
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
       setIsModalOpen(true);
@@ -176,21 +177,22 @@ const showModalUpdateUser = (record) => {
   return (
     <>                                                    
       {/* Props */}
-      <InputSearch handleSearch={handleSearch} />
-      <ViewDetailsUser openViewDetail={openViewDetail} dataViewDetail={dataViewDetail} onClose={onClose} />
-      <ModalCreateUser isModalOpen={isModalOpen} handleCancel={handleCancel} handleOk={handleOk}  fetchUser={fetchUser} />
-     <ModalUpdateUser isOpenModalUpdateUser={isOpenModalUpdateUser} handleOkUpdateUser={handleOkUpdateUser} handleCancelUpdateUser={handleCancelUpdateUser}  fetchUser={fetchUser}  dataUpdate={dataUpdate} setDataUpdate={setDataUpdate}/>
+      <InputSearchBook handleSearch={handleSearch} />
+      <ViewDetailsBook openViewDetail={openViewDetail} dataViewDetail={dataViewDetail} setOpenViewDetail={setOpenViewDetail} setDataViewDetail={setDataViewDetail} />
+      <ModalCreateBook isModalOpen={isModalOpen} handleCancel={handleCancel} handleOk={handleOk}  fetchUser={fetchUser} />
+     {/* <ModalUpdateUser isOpenModalUpdateUser={isOpenModalUpdateUser} handleOkUpdateUser={handleOkUpdateUser} handleCancelUpdateUser={handleCancelUpdateUser}  fetchUser={fetchUser}  dataUpdate={dataUpdate} setDataUpdate={setDataUpdate}/> */}
+     <ModalUpdateBook />
 
     
       {/* ------------- */}
 
       <div className='table-header' >
-        <div className='table-header-title'>Table list Users</div>
+        <div >Danh sách sách</div>
         <div className='table-header-btn' >
         <button className='btn-primary' onClick={handleExport}>
           <CloudDownloadOutlined style={{ paddingRight: '5px' }} /> Export
         </button>
-          <button className='btn-primary' onClick={showModal}><PlusOutlined style={{paddingRight : '5px'}} /> Add User</button>
+          <button className='btn-primary' onClick={showModal}><PlusOutlined style={{paddingRight : '5px'}} /> Thêm sách</button>
       
           <Button type='ghost'> <ReloadOutlined /></Button>
         </div>

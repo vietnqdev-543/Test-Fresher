@@ -1,0 +1,18 @@
+*{padding: 0 ; margin:  0; box-sizing: border-box;}
+.login-container{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-auto-rows: auto;
+    .login-container__item{
+        display: flex; /* Sử dụng flexbox để canh chỉnh chiều cao */
+         align-items: stretch; /* Đảm bảo chiều cao của con là full màn hình */
+    }
+    .login-container__item:first-child{
+        background-color: red;
+      
+    }
+    .login-container__item:last-child{
+        background-color: blue;
+    }
+}

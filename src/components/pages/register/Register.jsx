@@ -2,7 +2,7 @@
 import { Button, Checkbox, Form, Input ,message } from 'antd';
 
 import { useNavigate } from 'react-router-dom';
-import {callRegister} from "../../services/api"   
+import { callRegister } from '../../services/api';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
