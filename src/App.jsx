@@ -1,11 +1,11 @@
-import {createBrowserRouter,RouterProvider,} from "react-router-dom";
+import {createBrowserRouter,RouterProvider, useLocation} from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import ProtectedRoute from "./components/pages/ProtectedRoute/ProtectedRoute";
 import { useEffect, useState } from "react";
 import Header from "./components/layout/header/Header";
 import Footer from './components/layout/footer/Footer'
 import Home from './components/Home/Home'
-import LoginPage from "./components/pages/Login/LoginPage"
+import LoginPage  from "./components/pages/login/LoginPage";
 import Register from "./components/pages/Register/Register";
 import { callFetchAccount } from "./components/services/api";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,14 +26,14 @@ import UserDisable from "./components/pages/admin/UserManage/UserDisable";
 
 
 const Layout = ()=> {
-  const isLoginRoute = window.location.pathname.startsWith("/login")
+    const location = useLocation()
+    const isLoginPage = location.pathname === '/login' ;
+    const isRegisterPage = location.pathname === '/register'
   return (
     <>
-    <div className="layout-app"></div>  
-     {isLoginRoute ? null : <Header />}
-      <Outlet /> 
-      <Footer />
-     
+      {!isLoginPage && !isRegisterPage && ( <Header /> )}
+        <Outlet />
+      {!isLoginPage && !isRegisterPage && <Footer />}
     </>
   )
 }

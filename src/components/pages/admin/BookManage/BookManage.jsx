@@ -23,11 +23,11 @@ const UserManage = () => {
   const [dataViewDetail , setDataViewDetail] =useState ([])
 
   useEffect(()=> {
-    fetchUser();
+    fetchBook();
   },[current , pageSize])
 
 
-  const fetchUser = async (searchFilter) => {
+  const fetchBook = async (searchFilter) => {
     let query = `current=${current}&pageSize=${pageSize}`
     if(searchFilter){
       query += `&${searchFilter}`
@@ -117,7 +117,7 @@ const UserManage = () => {
 
   // input Search
   const handleSearch = (query) => {
-    fetchUser(query)
+    fetchBook(query)
   }
 
   //handle export
@@ -163,7 +163,7 @@ const showModalUpdateUser = (record) => {
     const res = await callDeleteAUser(_id)
     if(res  && res.data){
       message.success('Vô hiệu hóa người dùng thành công')
-      fetchUser ()
+      fetchBook ()
     }else{
       notification.error({
         message : 'Đã có lỗi xảy ra' ,
@@ -179,8 +179,7 @@ const showModalUpdateUser = (record) => {
       {/* Props */}
       <InputSearchBook handleSearch={handleSearch} />
       <ViewDetailsBook openViewDetail={openViewDetail} dataViewDetail={dataViewDetail} setOpenViewDetail={setOpenViewDetail} setDataViewDetail={setDataViewDetail} />
-      <ModalCreateBook isModalOpen={isModalOpen} handleCancel={handleCancel} handleOk={handleOk}  fetchUser={fetchUser} />
-     {/* <ModalUpdateUser isOpenModalUpdateUser={isOpenModalUpdateUser} handleOkUpdateUser={handleOkUpdateUser} handleCancelUpdateUser={handleCancelUpdateUser}  fetchUser={fetchUser}  dataUpdate={dataUpdate} setDataUpdate={setDataUpdate}/> */}
+      <ModalCreateBook isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} handleCancel={handleCancel} handleOk={handleOk}  fetchBook={fetchBook} />
      <ModalUpdateBook />
 
     

@@ -1,18 +1,21 @@
-*{padding: 0 ; margin:  0; box-sizing: border-box;}
-.login-container{
-    width: 100%;
-    display: grid;
-    grid-template-columns: 60% 40%;
-    grid-auto-rows: auto;
-    .login-container__item{
-        display: flex; /* Sử dụng flexbox để canh chỉnh chiều cao */
-         align-items: stretch; /* Đảm bảo chiều cao của con là full màn hình */
+.form-login{
+    margin: 0 30%;
+    .form-login-item:first-child{
+        padding: 10%;
+        background-color: white;
     }
-    .login-container__item:first-child{
-        background-color: red;
-      
+    .form-login-item:last-child{
+        padding: 10%;
+        background-color:white;
     }
-    .login-container__item:last-child{
-        background-color: blue;
-    }
+    
+        .button{
+            padding: 20px 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            
+        }
+    
 }
