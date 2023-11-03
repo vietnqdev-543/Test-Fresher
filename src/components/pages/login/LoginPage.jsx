@@ -30,25 +30,19 @@ const LoginPage = () => {
     console.log('Success:', values);
   };
   return (
-    <div className="form-login" style={{marginTop : 80}}>
-    
+    <div className="form-login">
+    <div className="form-login-item"></div>
     <div className="form-login-item form">
       <Form
         name="basic"
-        labelCol={{
-          span: 24,
-        }}
-        wrapperCol={{
-          span: 24,
-        }}
-        style={{maxWidth: 500,margin : "0 auto", padding : 20  , borderRadius : 5}}
+        style={{width : '60%',margin : "0 auto", padding : 20  , borderRadius : 5}}
         initialValues={{
           remember: true,
         }}
         onFinish={onFinish}
         autoComplete="off"
       >
-      <h1 style={{fontSize: '50px' , textAlign : 'center' , marginBottom: '20px'}}>User Login</h1>
+      <h1 style={{fontSize: '35px' , textAlign : 'center' , marginBottom: '20px'}}>USER LOGIN</h1>
         <Form.Item
           // label="Email"
           name="username"
@@ -59,7 +53,7 @@ const LoginPage = () => {
             },
           ]}
         >
-          <Input style={{padding : '10px' , fontSize: '20px' , color :'black'}}  placeholder='Username / Email'/>
+          <Input className='input-form'  placeholder='Username / Email'/>
         </Form.Item>
 
         <Form.Item
@@ -71,7 +65,7 @@ const LoginPage = () => {
             },
           ]}
         >
-          <Input.Password style={{padding : '10px' , fontSize: '20px' , color :'black'}} placeholder='Password'/>
+          <Input.Password className='input-form' placeholder='Password'  />
         </Form.Item>
 
         <Form.Item
@@ -92,7 +86,7 @@ const LoginPage = () => {
           }}
         >
         
-            <Button type="primary" htmlType="submit" loading={isSubmit} className='button'>
+            <Button style={{width: '200%', padding : '22px' , fontSize: '15px' , borderRadius : '2px'}} type="primary" htmlType="submit" loading={isSubmit} className='button'>
               LOGIN
             </Button>
         
@@ -101,6 +95,7 @@ const LoginPage = () => {
         <span>Chưa có tài khoản ? <Link to={"/register"}>Đăng ký</Link>  </span>
       </Form>
     </div>
+    
   </div>
   )
 }

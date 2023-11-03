@@ -10,6 +10,7 @@ import ViewDetailsUser from './ViewDetailsUser';
 import ModalUpdateUser from './ModalUpdateUser';
 import * as XLSX from 'xlsx';
 import moment from 'moment';
+import AdminPage from '../DashBoard/AdminPage';
 
 
 const UserManage = () => {
@@ -170,7 +171,7 @@ const showModalUpdateUser = (record) => {
       })
     }
   }
-
+const totalAccount = total
 
 
   return (
@@ -180,13 +181,15 @@ const showModalUpdateUser = (record) => {
       <ViewDetailsUser openViewDetail={openViewDetail} dataViewDetail={dataViewDetail} onClose={onClose} />
       <ModalCreateUser isModalOpen={isModalOpen} handleCancel={handleCancel} handleOk={handleOk}  fetchUser={fetchUser} />
      <ModalUpdateUser isOpenModalUpdateUser={isOpenModalUpdateUser} handleOkUpdateUser={handleOkUpdateUser} handleCancelUpdateUser={handleCancelUpdateUser}  fetchUser={fetchUser}  dataUpdate={dataUpdate} setDataUpdate={setDataUpdate}/>
+    
 
     
       {/* ------------- */}
 
       <div className='table-header' >
-        <div className='table-header-title'>Table list Users</div>
+        <div className='table-header-title'>Table list Users </div>
         <div className='table-header-btn' >
+        {totalAccount}
         <button className='btn-primary' onClick={handleExport}>
           <CloudDownloadOutlined style={{ paddingRight: '5px' }} /> Export
         </button>

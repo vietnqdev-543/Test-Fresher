@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Divider, Form, Input, InputNumber, message, Modal, notification, Row, Select, Upload } from 'antd';
-import { callCreateABook ,callFetchCategory , callUploadBookImg} from '../../../services/api';
+import { callCreateABook , callFetchCategory , callUploadBookImg } from '../../../services/api';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
-const BookModalCreate = (props) => {
-const { isModalOpen, setIsModalOpen , fetchBook} = props;
+const BookModalCreate = ( { isModalOpen, setIsModalOpen , fetchBook}) => {
     const [isSubmit, setIsSubmit] = useState(false);
 
-    const [listCategory, setListCategory] = useState([])
+    const [listCategory, setListCategory] = useState([]) // danh sách thể loại
     const [form] = Form.useForm();
 
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false); 
     const [loadingSlider, setLoadingSlider] = useState(false);
 
     const [imageUrl, setImageUrl] = useState("");
@@ -37,12 +36,15 @@ const { isModalOpen, setIsModalOpen , fetchBook} = props;
 
 
     const onFinish = async (values) => {
+        // console.log('check values' , values);
+        // console.log('check thumbnail' , dataThumbnail);
+        // console.log('check slider ', dataSlider);
         if(dataThumbnail.length === 0) {
             notification.error({
-                message : 'Error Validate' ,
-                description : 'Vui long upload anh thumbnail'
+                message : 'Lỗi Validate' ,
+                description : 'Vui lòng upload ảnh thumbnail'
             })
-            return ;
+            return ;   
         }
         if(dataSlider.length === 0){
             notification.error({
@@ -55,16 +57,23 @@ const { isModalOpen, setIsModalOpen , fetchBook} = props;
         const {mainText , author , price , sold , quantity , category} = values ;
         const thumbnail = dataThumbnail[0].name;
         const slider = dataSlider.map(item =>  item.name); 
+
         setIsSubmit(true)
         const res = await callCreateABook(thumbnail , slider , mainText , author , price, sold , quantity , category)
         if(res && res.data ){
-            message.success('Tạo mới sản phẩm thanh công')
+            message.success('Tạo mới sản phẩm thành công')
             form.resetFields()
             setDataSlider([])
             setDataThumbnail([])
-            setOpenModalCreate(false)
+            setIsModalOpen(false)
             await fetchBook()
+        }else{
+            notification.error({
+                message : 'Đã có lỗi xảy ra' ,
+                description : res.message
+            })
         }
+        setIsSubmit(false)
     };
 
 
@@ -117,7 +126,6 @@ const { isModalOpen, setIsModalOpen , fetchBook} = props;
     const handleUploadFileSlider = async ({ file, onSuccess, onError }) => {
         const res = await callUploadBookImg(file);
         if (res && res.data) {
-            //copy previous state => upload multiple images
             setDataSlider((dataSlider) => [...dataSlider, {
                 name: res.data.fileUploaded,
                 uid: file.uid
@@ -166,6 +174,7 @@ const { isModalOpen, setIsModalOpen , fetchBook} = props;
             >
                 <Divider />
 
+                
                 <Form
                     form={form}
                     name="basic"

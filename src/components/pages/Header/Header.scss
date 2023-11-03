@@ -1,6 +1,34 @@
 .header-container{
+    background-color: #FF871C;
+    padding: 20px 10%;
     display: flex;
-    .nav-logo{
-        color: red;
+    justify-content: space-between;
+    align-items: center;
+    .header-item-nav{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .nav-logo{
+            font-weight: bold;
+            font-size: 30px;
+            padding: 0 20px ;
+          
+        }
+        .nav-menu-item{
+            padding: 10px;
+            text-decoration: none;
+           
+        }
+    }
+
+    .header-item{
+        cursor: pointer;
+        .nav-userName{
+           
+        }
+        .nav-link{
+            display: flex;
+          
+        }
     }
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import {  Table , Button , Popconfirm, message, notification } from 'antd';
-import { callDeleteAUser, callFetchListBook } from '../../../services/api';
+import { callDeleteAUser, callFetchListBook , callDeleteBook } from '../../../services/api';
 import { ReloadOutlined } from '@ant-design/icons';
 import { PlusOutlined , CloudDownloadOutlined ,EditOutlined , DeleteOutlined ,EyeOutlined} from '@ant-design/icons';
 import ModalUpdateUser from '../UserManage/ModalUpdateUser';
@@ -13,10 +13,11 @@ import ModalUpdateBook from './ModalUpdateBook';
 
 
 const UserManage = () => {
-  const [listUser , setListUser] = useState([])
+  const [listBook , setListBook] = useState([])
   const [current,  setCurrent]= useState(1) // lưu lại trạng thái của table đang ở trang bao nhiêu
   const [pageSize , setPageSize] = useState(6) // lấy bao nhiêu phần tử 1 lần (table hiển thị bao nhiêu phần tử)
   const [total , setTotal] = useState (0) 
+
 
   //drawer view details
   const [openViewDetail , setOpenViewDetail] = useState(false)
@@ -34,7 +35,7 @@ const UserManage = () => {
     }
     const res = await callFetchListBook(query)
      if(res && res.data){
-       setListUser(res.data.result);
+       setListBook(res.data.result);
        setTotal(res.data.meta.total)
     }
   }
@@ -79,16 +80,16 @@ const UserManage = () => {
           <>
             <div style={{display: 'flex' , alignItems : 'center'}}>
             <Popconfirm
-              placement="left"
-              title="Xác nhận vô hiệu hóa"
-              description="Bạn chắc chắn muốn vô hiệu hóa tài khoản này?"
-              onConfirm={()=> {handleDeleteUser(record._id)}}
+              placement="leftTop"
+              title="Xác nhận"
+              description="Bạn chắc chắn muốn vô hiệu hóa sách này?"
+              onConfirm={()=> {handleDeleteBook(record._id)}}
               okText="Xác nhận"
               cancelText="Hủy"
             >
               <DeleteOutlined  style={{ paddingRight : 10, fontSize: 20 , cursor : 'pointer'}} />
             </Popconfirm>
-            <EditOutlined onClick={()=>{showModalUpdateUser() ; setDataUpdate(record)}} style={{ paddingRight : 10, fontSize: 20}} />
+            <EditOutlined onClick={()=>{showModalUpdate() ; setDataUpdate(record)}} style={{ paddingRight : 10, fontSize: 20}} />
             <EyeOutlined  style={{ fontSize: 20}}  onClick={()=> {setDataViewDetail(record ) , setOpenViewDetail(true) }}  />
             </div>
             
@@ -122,8 +123,8 @@ const UserManage = () => {
 
   //handle export
   const handleExport = () => {
-    if (listUser.length > 0) {
-      const worksheet = XLSX.utils.json_to_sheet(listUser);
+    if (listBook.length > 0) {
+      const worksheet = XLSX.utils.json_to_sheet(listBook);
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
       XLSX.writeFile(workbook, "ExportUser.xlsx");
@@ -142,35 +143,34 @@ const handleCancel = () => {
       setIsModalOpen(false);
 };
 
-//Modal update user 
-const [isOpenModalUpdateUser, setIsOpenModalUpdateUser] = useState(false);
-const [dataUpdate, setDataUpdate] = useState([]);
-
-const showModalUpdateUser = (record) => {
-  setDataUpdate(record);
-  setIsOpenModalUpdateUser(true);
+//modal update book 
+const [openModalUpdate , setOpenModalUpdate] = useState(false)
+const [dataUpdate , setDataUpdate] = useState([])
+const showModalUpdate = (record) => {
+  setDataUpdate(record)
+  setOpenModalUpdate(true)
+}
+const handleOkUpdate = () => {
+  setOpenModalUpdate(false);
+};
+const handleCancelUpdate = () => {
+  setOpenModalUpdate(false);
 };
 
-  const handleOkUpdateUser = () => {
-    setIsOpenModalUpdateUser(false);
-  };
-  const handleCancelUpdateUser = () => {
-    setIsOpenModalUpdateUser(false);
-  };
 
-  //delete user
-  const handleDeleteUser = async(_id) => {
-    const res = await callDeleteAUser(_id)
-    if(res  && res.data){
-      message.success('Vô hiệu hóa người dùng thành công')
-      fetchBook ()
-    }else{
-      notification.error({
-        message : 'Đã có lỗi xảy ra' ,
-        description : res.message 
-      })
-    }
+const handleDeleteBook = async(id) => {
+  const res = await callDeleteBook(id)
+  if(res  && res.data){
+    message.success('Vô hiệu hóa sách thành công')
+    fetchBook()
+  }else{
+    notification.error({
+      message : 'Đã có lỗi xảy ra' ,
+      description : res.message 
+    })
   }
+}
+
 
 
 
@@ -180,7 +180,8 @@ const showModalUpdateUser = (record) => {
       <InputSearchBook handleSearch={handleSearch} />
       <ViewDetailsBook openViewDetail={openViewDetail} dataViewDetail={dataViewDetail} setOpenViewDetail={setOpenViewDetail} setDataViewDetail={setDataViewDetail} />
       <ModalCreateBook isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} handleCancel={handleCancel} handleOk={handleOk}  fetchBook={fetchBook} />
-     <ModalUpdateBook />
+      <ModalUpdateBook openModalUpdate={openModalUpdate} setOpenModalUpdate={setOpenModalUpdate} dataUpdate={dataUpdate} setDataUpdate={setDataUpdate} fetchBook={fetchBook}/>
+     
 
     
       {/* ------------- */}
@@ -203,7 +204,7 @@ const showModalUpdateUser = (record) => {
       <Table
         className='def'
         columns={columns} 
-        dataSource={listUser} 
+        dataSource={listBook} 
         onChange={onChange} 
         rowKey= "_id"
         pagination={{ 

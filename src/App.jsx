@@ -2,7 +2,7 @@ import {createBrowserRouter,RouterProvider, useLocation} from "react-router-dom"
 import { Outlet } from "react-router-dom";
 import ProtectedRoute from "./components/pages/ProtectedRoute/ProtectedRoute";
 import { useEffect, useState } from "react";
-import Header from "./components/layout/header/Header";
+import Header from "./components/pages/Header/Header";
 import Footer from './components/layout/footer/Footer'
 import Home from './components/Home/Home'
 import LoginPage  from "./components/pages/login/LoginPage";

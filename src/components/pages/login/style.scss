@@ -1,12 +1,20 @@
 .form-login{
-    margin: 0 30%;
+    display: flex;
     .form-login-item:first-child{
-        padding: 10%;
-        background-color: white;
+        background-image: url('./book.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 50%;
+        height: 100vh;
+        
     }
     .form-login-item:last-child{
-        padding: 10%;
         background-color:white;
+        width: 50%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
         .button{
@@ -18,4 +26,9 @@
             
         }
     
+}
+.input-form{
+    font-size: 15px;
+    border-radius: 2px;
+    padding : 10px;
 }
