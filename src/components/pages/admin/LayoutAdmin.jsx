@@ -1,6 +1,6 @@
 
 import { Outlet } from 'react-router-dom'
-import { Menu, message } from 'antd';
+import { Menu, message , notification} from 'antd';
 import "./LayoutAdmin.scss"
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -67,7 +67,10 @@ const LayoutAdmin = () => {
     }
   }
   const handleHome = () => {
-    message.success("chuyển sang trang home")
+    notification.success({
+      message : 'Thông báo' ,
+      description : 'Chuyển sang trang home thành công'
+  })
     navigate("/")
   }
   const nightMode =()=> {

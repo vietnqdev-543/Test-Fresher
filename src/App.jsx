@@ -3,8 +3,8 @@ import { Outlet } from "react-router-dom";
 import ProtectedRoute from "./components/pages/ProtectedRoute/ProtectedRoute";
 import { useEffect, useState } from "react";
 import Header from "./components/pages/Header/Header";
-import Footer from './components/layout/footer/Footer'
-import Home from './components/Home/Home'
+import Footer from "./components/pages/Footer/Footer";
+import Home from "./components/pages/Home/Home";
 import LoginPage  from "./components/pages/login/LoginPage";
 import Register from "./components/pages/Register/Register";
 import { callFetchAccount } from "./components/services/api";
@@ -22,6 +22,7 @@ import BookManage from './components/pages/admin/BookManage/BookManage'
 import OrderManage from "./components/pages/admin/OrderManage/OrderManage";
 import UserManage from "./components/pages/admin/UserManage/UserManage";
 import UserDisable from "./components/pages/admin/UserManage/UserDisable";
+import ProductDetailPage from "./components/pages/Product/ProductDetailPage";
 
 
 
@@ -78,6 +79,10 @@ export default function App(){
         {
           path : "product" ,
           element : <Product />   
+        },
+        {
+          path : 'book/:slug',
+          element : <ProductDetailPage />
         }
       ],
     },

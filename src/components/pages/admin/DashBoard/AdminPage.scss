@@ -25,10 +25,12 @@
   
     .item1 {
       grid-area: aa;
+      background-image: linear-gradient(to right,red  , yellow);
     }
   
     .item2 {
       grid-area: bb;
+      background-image: linear-gradient(to right ,  pink, blue);
     }
   
     .item3 {

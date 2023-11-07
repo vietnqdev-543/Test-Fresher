@@ -17,6 +17,7 @@ const UserManage = () => {
   const [current,  setCurrent]= useState(1) // lưu lại trạng thái của table đang ở trang bao nhiêu
   const [pageSize , setPageSize] = useState(6) // lấy bao nhiêu phần tử 1 lần (table hiển thị bao nhiêu phần tử)
   const [total , setTotal] = useState (0) 
+  const [sortQuery, setSortQuery] = useState("sort=-sold")
 
 
   //drawer view details
@@ -25,7 +26,7 @@ const UserManage = () => {
 
   useEffect(()=> {
     fetchBook();
-  },[current , pageSize])
+  },[current , pageSize , sortQuery])
 
 
   const fetchBook = async (searchFilter) => {
@@ -33,6 +34,9 @@ const UserManage = () => {
     if(searchFilter){
       query += `&${searchFilter}`
     }
+    if (sortQuery) {
+      query += `&${sortQuery}`
+  }
     const res = await callFetchListBook(query)
      if(res && res.data){
        setListBook(res.data.result);
@@ -41,6 +45,8 @@ const UserManage = () => {
   }
 
   const columns = [
+    
+   
     {
       title: 'ID',
       dataIndex: '_id',
@@ -161,7 +167,10 @@ const handleCancelUpdate = () => {
 const handleDeleteBook = async(id) => {
   const res = await callDeleteBook(id)
   if(res  && res.data){
-    message.success('Vô hiệu hóa sách thành công')
+    notification.success({
+      message : 'Thông báo ',
+      description : 'Sản phẩm đã được chuyển sang thùng rác'
+    })
     fetchBook()
   }else{
     notification.error({

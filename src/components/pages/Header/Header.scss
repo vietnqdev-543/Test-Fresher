@@ -1,23 +1,23 @@
 .header-container{
+    width: 100%;
     background-color: #FF871C;
-    padding: 20px 10%;
+    padding: 25px 10%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .header-item-nav{
+    .nav-logo{
+        font-weight: bold;
+        font-size: 30px;
+        padding: 0 20px ;
+      
+    }
+    .nav-menu{
         display: flex;
         justify-content: center;
         align-items: center;
-        .nav-logo{
-            font-weight: bold;
-            font-size: 30px;
-            padding: 0 20px ;
-          
-        }
         .nav-menu-item{
             padding: 10px;
             text-decoration: none;
-           
         }
     }
 
@@ -28,7 +28,44 @@
         }
         .nav-link{
             display: flex;
+            .btn-login{
+                color: white;
+                font-weight: bold;
+                text-decoration: none;
+                padding: 10px 40px;
+                font-size: 20px;
+                border: 1px solid white;
+                border-radius: 15px;
+                transition: background-color 0.3s ease;
+                margin: 0 10px;
+            }.btn-login:hover{
+                background-color: white;
+                color: #FF871C;
+            }
+
+            .btn-register{
+                color: white;
+                font-weight: bold;
+                text-decoration: none;
+                padding: 10px 20px;
+                font-size: 20px;
+                border-radius: 15px;
+                transition: background-color 0.3s ease;
+            }.btn-register:hover{
+                background-color: white;
+                color: #FF871C;
+            }
           
         }
     }
+}
+
+@media screen and (max-width: 600px) {
+   .nav-menu .nav-menu-item{
+    display: none;
+   }
+}
+
+@media screen and (max-width: 800px) and (min-width: 601px) {
+   
 }

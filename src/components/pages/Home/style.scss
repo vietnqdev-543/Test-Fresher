@@ -1,0 +1,213 @@
+*{margin: 0;padding: 0;box-sizing: border-box;}
+.primary-color {
+    color: #FF871C;
+}
+.home-container{
+    width: 100%;
+    padding: 0 0 20px 0;
+    .banner1{
+        width: 100%;
+        height: auto;
+        background-color: #FF871C;
+        display: flex;
+        padding: 0 11%;
+        padding-bottom: 5%;
+        color: white;  
+        .item:first-child{
+            width: 50%;
+            margin-top: 40px;
+            h1{
+                font-size: 70px;
+                padding-bottom: 40px;
+            }
+            button{
+                padding: 15px 40px;
+                background-color: white;
+                border: none;
+                color: #FF871C;
+                border-radius: 20px;
+                font-size: 17px;
+                font-weight: bold;
+                text-decoration: none;
+                margin: 20px 0;
+            }
+        }
+        .item:last-child{
+                 width: 60%;
+                background-image: url('./ebook.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+            
+            
+        }
+    }
+    .banner2{
+        padding: 50px 0;
+        background-color: white;
+        .box{
+            display: flex;
+            width: 100%;
+            padding:0  10%  ;
+            justify-content: center;
+            margin-top: 20px;
+            .box-item{
+                width: calc(25% - 20px);
+                margin: 0 20px;
+                border: 1px solid #cfcfcf;
+                border-radius: 5px;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding:20px 10px;
+                transition: background-color 0.3s ease;
+                .circle{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 90px;
+                    height: 90px;
+                    background-color: #EFEFF0;
+                    border-radius: 50%;
+                    margin: 10px 0;
+                    .icon{
+                        font-size: 50px;
+                        color: #616E74;
+                    }
+                }
+                .name{
+                    font-size: 20px;
+                    margin: 10px 0;
+                    color: #616E74;
+                }
+                .des{
+                    text-align: center;
+                    margin: 10px 0;
+                    color: #616E74;
+                }
+                .button{
+                    padding: 10px 20px;
+                    border-radius: 2px;
+                    border: 1px solid #616E74;
+                    color: #616E74;
+                    margin: 10px;
+                    cursor: pointer;
+                }
+            }
+            .box-item:hover{
+                background-color: #FF871C;
+                .circle{
+                    .icon{
+                        color: #FF871C;
+                    }
+                }
+                .name{
+                    color: white;
+                }
+                .des{
+                    color: white;
+                }
+                .button{
+                    border: 1px solid white;
+                    color: white;
+                }
+            }
+        }
+    }
+//banner3
+    .banner3{
+        padding: 50px 0;
+        background-color: #EFEFF0;
+        .box{
+            display: flex;
+            width: 100%;
+            padding:0  10%  ;
+            justify-content: center;
+            margin-top: 20px;
+            .box-item{
+                width: calc(25% - 20px);
+                margin: 0 20px;
+                background-color: white;
+                border-radius: 5px;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
+                transition: background-color 0.3s ease;
+                .thumbnail img{
+                    width: 100%;
+                    height: auto;
+                }
+                .author{
+                    color: black;
+                    font-size: 20px;
+                    padding-top: 10px ;
+                }
+                .caption{
+                    position: absolute;
+                    left: 0px;
+                    top: 50%;
+                    width: 100%;
+                    padding: 30px;
+                    text-align: center;
+                    opacity: 0;
+                    margin-top: 30px
+                }
+            }
+          
+        }
+    }
+
+
+    .banner4{
+        background-color: #FF871C;
+        padding: 70px 11%;
+        display: flex;
+        justify-content: space-between;
+        .item{
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            span{
+                font-size: 50px;
+            }
+            p{
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+   .banner1{
+    width: 100%;
+    .item:first-child{
+        width: 100%;
+        .title{
+            font-size: 10px;
+        }
+        p{
+            display: none;
+        }
+    }
+    .item:last-child{
+        display: none;
+    }
+   }
+   .banner2{
+    .box{
+        .box-item{
+            width: 50%;
+        }
+    }
+   }
+}
+
+@media screen and (max-width: 800px) and (min-width: 601px) {
+    .column {
+        flex: unset;
+        width: calc(33% - 8px);
+        flex-wrap: wrap;
+    }
+}

@@ -106,7 +106,12 @@ const BookModalUpdate = ({ openModalUpdate, setOpenModalUpdate, dataUpdate, setD
         setIsSubmit(true)
         const res = await callUpdateBook( _id , thumbnail , slider ,mainText, author, price, sold, quantity, category )
         if (res && res.data) {
-            message.success('Cập nhật sách thành công');
+            // message.success('Cập nhật sách thành công');
+            notification.success({
+                message : 'Thông báo',
+                description : 'Cập nhật danh sách thành công'
+
+            })
             form.resetFields();
             setDataSlider([]);
             setDataThumbnail([])

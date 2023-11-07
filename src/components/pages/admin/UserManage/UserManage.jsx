@@ -195,7 +195,7 @@ const totalAccount = total
         </button>
           <button className='btn-primary' onClick={showModal}><PlusOutlined style={{paddingRight : '5px'}} /> Add User</button>
       
-          <Button type='ghost'> <ReloadOutlined /></Button>
+          <Button onClick={fetchUser} type='ghost'> <ReloadOutlined /></Button>
         </div>
       </div>
       
