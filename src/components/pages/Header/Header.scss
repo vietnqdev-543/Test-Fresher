@@ -18,12 +18,24 @@
         .nav-menu-item{
             padding: 10px;
             text-decoration: none;
+        }.nav-menu-item:hover{
+            color : red
         }
     }
 
     .header-item{
         cursor: pointer;
+       
+       
         .nav-userName{
+            display: flex;
+            justify-content: center;
+            .iconCart{
+                color: white;
+                font-size: 25px;
+                font-weight: bold;
+                
+            }
            
         }
         .nav-link{

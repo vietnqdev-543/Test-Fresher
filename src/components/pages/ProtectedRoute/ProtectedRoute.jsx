@@ -1,16 +1,19 @@
 import { useSelector } from "react-redux"
+import { useLocation } from "react-router-dom"
 import { Navigate } from "react-router-dom"
 import Notpermitted from "../../Notpermitted/Notpermitted"
 const RoleBaseRoute = (props) => {
-    const isAdminRoute = window.location.pathname.startsWith('/admin') // xác nhận có vào trang admin không
-    const user = useSelector(state => state.account.user)
-    const userRole = user.role
+    const location = useLocation();
+    const isAdminRoute = location.pathname.startsWith('/admin'); 
+    const user = useSelector(state => state.account.user);
+    const userRole = user.role;
 
-    if (isAdminRoute && userRole === 'ADMIN') {
-        return (<>{props.children}</>)
-    } else {
-        return <Notpermitted />
+    if (isAdminRoute && userRole !== 'ADMIN') {
+        // Chuyển hướng người dùng đến trang Notpermitted nếu không có quyền truy cập admin
+         return <Navigate to="/notpermitted" />;
     }
+
+    return <>{props.children}</>;
 }       
 
 const ProtectedRoute = (props) => {

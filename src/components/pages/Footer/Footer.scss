@@ -1,0 +1,22 @@
+.footer-container{
+    width: 100%;
+    min-height: 100px;
+    padding: 3% 11% 2% 11%;
+    background-color: white;
+    .footer-header{
+        .brand{
+            font-size:40px;
+            margin-bottom: 10px;
+        }
+    }
+    .footer-content{
+      display: flex;
+      justify-content: space-between;
+    .footer-item{
+        .title{
+            color: #FF871C;
+            padding-bottom: 10px;
+        }
+    }
+  }
+}

@@ -9,12 +9,20 @@ import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { BsCartPlus } from 'react-icons/bs';
 import { callFetchBookById } from '../../services/api';
 import BookLoader from './BookLoader';
+import { useDispatch } from 'react-redux';
+import { doAddBookAction } from '../../../redux/order/orderSlice'
+
 const ProductDetailPage = () => {
     const [dataBook , setDataBook] = useState()
+    const [isOpenModalGallery, setIsOpenModalGallery] = useState(false);
+    const [currentIndex, setCurrentIndex] = useState(0);
+
     let location = useLocation()
+    const dispatch = useDispatch()
+
     let params = new URLSearchParams(location.search);
     const id = params?.get('id')
-    console.log('check book id' , id);
+  
 
     useEffect(()=>{
         fetchBook(id)
@@ -62,31 +70,30 @@ const ProductDetailPage = () => {
     }
 
     
-    const [isOpenModalGallery, setIsOpenModalGallery] = useState(false);
-    const [currentIndex, setCurrentIndex] = useState(0);
+    
 
     const refGallery = useRef(null);
 
     const images = dataBook?.items ?? [];
 
-    const handleOnClickImage = () => {
-        //get current index onClick
-        // alert(refGallery?.current?.getCurrentIndex());
+    const handleOnClickImage = () => {   
         setIsOpenModalGallery(true);
-        setCurrentIndex(refGallery?.current?.getCurrentIndex() ?? 0)
-        // refGallery?.current?.fullScreen()
+        setCurrentIndex(refGallery?.current?.getCurrentIndex() ?? 0)  
     }
 
-    const onChange = (value) => {
-        console.log('changed', value);
+    const [currentQuantity, setCurrentQuantity] = useState(1)
+
+    const handleAddToCart = () => {
+        dispatch(doAddBookAction({ quantity: currentQuantity, detail: dataBook, _id: dataBook._id }));
     };
+ 
   return (
     <div style={{ background: '#efefef', padding: "20px 0" }}>
-    <div className='view-detail-book' style={{ maxWidth: 1440, margin: '0 auto', minHeight: "calc(100vh - 150px)" }}>
+    <div className='view-detail-book' style={{ maxWidth: 1440, margin: '0 auto', height:'auto'}}>
         <div style={{ padding: "20px", background: '#fff', borderRadius: 5 }}>
             {dataBook && dataBook._id ?
                 <Row gutter={[20, 20]}>
-                <Col md={10} sm={0} xs={0}>
+                <Col md={8} sm={24} xs={24} style={{marginRight:'10%'}}>
                     <ImageGallery
                         ref={refGallery}
                         items={images}
@@ -98,9 +105,10 @@ const ProductDetailPage = () => {
                         onClick={() => handleOnClickImage()}
                     />
                 </Col>
-                <Col md={14} sm={24}>
-                    <Col md={0} sm={24} xs={24}>
+                <Col md={12} sm={24}>
+                    <Col md={24} sm={24} xs={24}>
                         <ImageGallery
+                            thumbnailPosition='left'
                             ref={refGallery}
                             items={images}
                             showPlayButton={false} //hide play button
@@ -139,13 +147,13 @@ const ProductDetailPage = () => {
                         <div className='quantity'>
                             <span className='left'>Số lượng</span>
                             <span className='right'>
-                                <button ><MinusOutlined /></button>
-                                <input defaultValue={1} />
-                                <button><PlusOutlined /></button>
+                                <button onClick={() => { setCurrentQuantity(pre => (pre > 1 ? pre - 1 : pre)) }}><MinusOutlined /></button>
+                                  <input className='number' value={currentQuantity}/>
+                                <button onClick={()=>{setCurrentQuantity(pre => (pre < dataBook.quantity ? pre + 1 : pre) )}}><PlusOutlined /></button>
                             </span>
                         </div>
                         <div className='buy'>
-                            <button className='cart'>
+                            <button className='cart' onClick={()=> handleAddToCart(currentQuantity , dataBook)}>
                                 <BsCartPlus className='icon-cart' />
                                 <span>Thêm vào giỏ hàng</span>
                             </button>

@@ -64,6 +64,7 @@ const ViewDetailsBook = ({ openViewDetail, dataViewDetail , setOpenViewDetail , 
           <Descriptions.Item label="Tác giả" >{dataViewDetail?.author}</Descriptions.Item>
           <Descriptions.Item label="Thể loại">{dataViewDetail?.category}</Descriptions.Item>
           <Descriptions.Item label="Giá tiền">{dataViewDetail?.price} vnd</Descriptions.Item>
+          <Descriptions.Item label="Giá niêm yết">{dataViewDetail?.listedPrice}</Descriptions.Item>
           <Descriptions.Item label="Đã bán">{dataViewDetail?.sold}</Descriptions.Item>
           <Descriptions.Item label="Số lượng">{dataViewDetail?.quantity}</Descriptions.Item>
           <Descriptions.Item label="Ngày tạo">

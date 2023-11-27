@@ -34,7 +34,7 @@ export const callFetchListBook = (query) => {
   // current : current=1&pageSize=10
   return axios.get(`/api/v1/book?${query}`)
 }
-export const callCreateABook = (thumbnail , slider , mainText , author , price, sold , quantity , category) => {
+export const callCreateABook = (thumbnail , slider , mainText , author , price ,  sold , quantity , category ) => {
   return axios.post('/api/v1/book', {thumbnail , slider , mainText , author , price, sold , quantity , category})
 }
 export const callFetchCategory = () => { //get book category
@@ -65,4 +65,12 @@ export const callDeleteBook = (id) =>{
 
 export const callFetchBookById = (id) => {
   return axios.get(`api/v1/book/${id}`)
+}
+
+
+// order
+export const callPlaceOrder = (data) =>{
+return axios.post('api/v1/order', {
+  ...data
+})
 }

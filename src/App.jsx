@@ -23,8 +23,12 @@ import OrderManage from "./components/pages/admin/OrderManage/OrderManage";
 import UserManage from "./components/pages/admin/UserManage/UserManage";
 import UserDisable from "./components/pages/admin/UserManage/UserDisable";
 import ProductDetailPage from "./components/pages/Product/ProductDetailPage";
+import ViewDetails from "./components/test/ViewDetails";
+import Test from "./components/test/Test";
 
-
+import './components/style/global.scss'
+import OrderPage from "./components/pages/OrderPage/OrderPage";
+import Notpermitted from "./components/Notpermitted/Notpermitted";
 
 const Layout = ()=> {
     const location = useLocation()
@@ -39,7 +43,6 @@ const Layout = ()=> {
   )
 }
 
-<LayoutAdmin/>
 
 export default function App(){
   const dispatch = useDispatch()
@@ -83,7 +86,20 @@ export default function App(){
         {
           path : 'book/:slug',
           element : <ProductDetailPage />
+        },
+        {
+          path:'test',
+          element : <Test />
+        },
+        {
+          path: 'viewDetail',
+          element : <ViewDetails />
+        },
+        {
+          path : 'order',
+          element:<OrderPage />
         }
+        
       ],
     },
 
@@ -102,17 +118,14 @@ export default function App(){
           element: <UserManage />
         },
         {
-          path: "userDisable",
-          element: <UserDisable />
-        },
-        {
           path : "book" ,
           element : <BookManage />
         },
         {
           path : "order" ,
           element :  <OrderManage />
-        }
+        },
+      
         
       ],
     },

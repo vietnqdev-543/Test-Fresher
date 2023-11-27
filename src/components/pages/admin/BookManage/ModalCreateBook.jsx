@@ -202,6 +202,7 @@ const BookModalCreate = ( { isModalOpen, setIsModalOpen , fetchBook}) => {
                                 <Input />
                             </Form.Item>
                         </Col>
+                       
                         <Col span={6}>
                             <Form.Item
                                 labelCol={{ span: 24 }}

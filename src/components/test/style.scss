@@ -2,7 +2,12 @@
 
 .view-detail-book {
 
-    .original-image,
+    .original-image{
+        max-width: 100%; /* Đặt chiều rộng tối đa là 100% của phần tử chứa ảnh */
+        max-height: 450px; /* Đặt chiều cao tối đa cho ảnh, thay đổi giá trị theo nhu cầu của bạn */
+        width: auto; /* Đảm bảo chiều rộng tỷ lệ được giữ nguyên */
+        height: auto; /* Đảm bảo chiều cao tỷ lệ được giữ nguyên */
+    }
     .thumbnail-image {
         cursor: pointer;
     }
@@ -38,25 +43,25 @@
 
     .delivery {
         padding: 10px 0;
+        margin: 10px 0;
     }
 
     .quantity {
         padding: 10px 0;
         display: flex;
         align-items: center;
-
-        .right {
-            display: flex;
-
-            .number {
+            input {
                 width: 50px;
                 height: 32px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: text ;
+                border-left: 0;
+                border-right: 0;
+                font-size: 16px;
+                font-weight: 400;
+                text-align: center;
+                cursor: text;
+                border-radius: 0;
                 border: 1px solid rgba(0, 0, 0, 0.09);
-          ;
+                outline: none;
             }
 
             button {
@@ -78,60 +83,31 @@
                 width: 32px;
                 height: 32px;
             }
-        }
+        
     }
 
-    .left {
-        color: #757575;
-        width: 110px;
-        text-transform: capitalize;
-        display: inline-block;
+    .btn-addCart{
+        margin: 0 20px;
+        padding: 12px 30px;
+        border-radius: 3px;
+        border: none;
+        background-color: #F48029;
+        font-weight: bold;
+        font-size: 15px;
+    }.btn-addCart:hover{
+        opacity: 0.8;
     }
-
-    .buy {
-        display: flex;
-        gap: 20px;
-        padding: 20px 0;
-
-        button {
-            overflow: visible;
-            outline: 0;
-            background: #ff57221a;
-            color: #FF871C;
-            border: 1px solid #FF871C;
-            box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .03);
-            cursor: pointer;
-            border-radius: 3px;
-
+    
+    .parameter {
+        .front{
+            color: black;
+            font-weight: bold;
             font-size: 16px;
-            height: 48px;
-            padding: 0 20px;
-
-            &.now {
-                color: #fff;
-                position: relative;
-                overflow: visible;
-                outline: 0;
-                border: none;
-                background-color: #FF871C;
-            }
         }
-
-        .cart {
-            &:hover {
-                background: #ffc5b22e;
-            }
-
-            span {
-                padding-left: 5px;
-            }
-        }
-
-        .now {
-            &:hover {
-                background: #f05d40;
-                border: none;
-            }
+        .back{
+            padding-left: 20px;
+            color: grey;
+            font-size: 15px;
         }
     }
 
