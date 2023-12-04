@@ -6,7 +6,7 @@ import Header from "./components/pages/Header/Header";
 import Footer from "./components/pages/Footer/Footer";
 import Home from "./components/pages/Home/Home";
 import LoginPage  from "./components/pages/login/LoginPage";
-import Register from "./components/pages/Register/Register";
+import Register from "./components/pages/register/Register";
 import { callFetchAccount } from "./components/services/api";
 import { useDispatch, useSelector } from "react-redux";
 import { doGetAccountAction } from "./redux/account/accountSlice";
@@ -21,14 +21,13 @@ import LayoutAdmin from './components/pages/admin/LayoutAdmin'
 import BookManage from './components/pages/admin/BookManage/BookManage'
 import OrderManage from "./components/pages/admin/OrderManage/OrderManage";
 import UserManage from "./components/pages/admin/UserManage/UserManage";
-import UserDisable from "./components/pages/admin/UserManage/UserDisable";
 import ProductDetailPage from "./components/pages/Product/ProductDetailPage";
 import ViewDetails from "./components/test/ViewDetails";
 import Test from "./components/test/Test";
 
 import './components/style/global.scss'
 import OrderPage from "./components/pages/OrderPage/OrderPage";
-import Notpermitted from "./components/Notpermitted/Notpermitted";
+
 
 const Layout = ()=> {
     const location = useLocation()
