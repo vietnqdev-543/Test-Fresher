@@ -81,7 +81,7 @@ const LayoutAdmin = () => {
       <div className="layout-app">
         <div className="aside item">
           <div className="aside-header">
-            <h2 className='aside-header-brand'>Glasses Store</h2>
+            <h2 className='aside-header-brand'>HYPERBOOK</h2>
           </div>
           <Menu
             onClick={onClick}

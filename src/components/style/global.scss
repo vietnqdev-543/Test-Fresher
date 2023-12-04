@@ -1,0 +1,38 @@
+.popover-cart-body{
+
+    .popover-cart-content{
+       .popover-cart-product{
+        display: flex;
+        padding: 5px 10px;
+        align-items: center;
+        justify-content: space-between;
+        
+        .left{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .image{
+                width: 50px;
+                height: auto;
+            }
+            .name{
+                padding: 0 10px;
+            }
+        }
+        .price{
+            color: #FF871C;
+            padding: 0 10px;
+        }
+       }
+    }
+    button{
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        color: white;
+        right: 0;
+        margin: 10px 0 5px 0;
+        background-color: #FF871C;
+    }
+
+}

@@ -5,8 +5,20 @@ import { FaShippingFast } from 'react-icons/fa'
 import { BiSolidBookAlt } from 'react-icons/bi'
 import { FaCoins } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
+import { Carousel } from 'antd'
+const contentStyle = {
+  margin: 0,
+  minHeight: '300px',
+  color: '#fff',
+  lineHeight: '160px',
+  textAlign: 'center',
+  background: '#364d79',
+};
 const Home = () => {
   const navigate = useNavigate()
+  const onChange = (currentSlide) => {
+    console.log(currentSlide);
+  };
   return (
     <div className="home-container">
       <div className="banner1">
@@ -20,6 +32,29 @@ const Home = () => {
           </div>
         </div>
       </div>
+      {/* <div className="slider" style={{width:'100%' ,height :'auto'}}>
+      <Carousel autoplay autoplaySpeed={2000} afterChange={onChange}>
+     
+        <div>
+          <div style={contentStyle}>
+            <img style={{width:'100%' ,height:'100%'}} src="https://phunuvietnam.mediacdn.vn/media/news/4d0b954f0bef437c29dfa73fafdf3fa5/tiki.jpg" alt="" />
+          </div>
+        </div>
+
+        <div>
+          <div style={contentStyle}>
+            <img style={{width:'100%' ,height:'100%'}} src="https://vanhanhmall.com/wp-content/uploads/2018/04/Rainbow-Book-Fair-Website-banner-01.jpg" alt="" />
+          </div>
+        </div>
+
+        <div>
+          <div style={contentStyle}>
+            <img style={{width:'100%' ,height:'100%'}} src="https://img.freepik.com/premium-vector/banner-with-books-concept-education-learning-training-knowledge-information-useful-hobby-love-literature-reading-cartoon-flat-vector-illustration-isolated-pink-background_1002658-557.jpg" alt="" />
+          </div>
+        </div>
+    
+    </Carousel>
+      </div> */}
       <div className="banner2">
         <div>
           <h1 className="title" style={{ textAlign: 'center' }}>

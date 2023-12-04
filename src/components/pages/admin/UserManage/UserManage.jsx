@@ -91,10 +91,10 @@ const UserManage = () => {
               okText="Xác nhận"
               cancelText="Hủy"
             >
-              <DeleteOutlined  style={{ paddingRight : 10, fontSize: 20 , cursor : 'pointer'}} />
+              <DeleteOutlined className='deleteBtn'  style={{ paddingRight : 10, fontSize: 25 }} />
             </Popconfirm>
-            <EditOutlined onClick={()=>{showModalUpdateUser() ; setDataUpdate(record)}} style={{ paddingRight : 10, fontSize: 20}} />
-            <EyeOutlined  style={{ fontSize: 20}}  onClick={()=> {setDataViewDatail(record ) , setOpenViewDetail(true) }}  />
+            <EditOutlined className='editBtn' onClick={()=>{showModalUpdateUser() ; setDataUpdate(record)}} style={{ paddingRight : 10, fontSize: 25}} />
+            <EyeOutlined className='viewBtn'  style={{ fontSize: 25}}  onClick={()=> {setDataViewDatail(record ) , setOpenViewDetail(true) }}  />
             </div>
             
           </>

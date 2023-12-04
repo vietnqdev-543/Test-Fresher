@@ -1,5 +1,5 @@
 
-import { Button, Checkbox, Form, Input , message } from 'antd';
+import { Button, Checkbox, Form, Input , message, notification } from 'antd';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -22,10 +22,18 @@ const LoginPage = () => {
       localStorage.setItem('access_token' , res.data.access_token)
       dispatch(doLoginAction(res.data.user))
       console.log("check res :" , res.data.access_token);
-      message.success("Đăng nhập thành công")
+      notification.success({
+        message: 'Thông báo',
+        description : 'Đăng nhập thành công'
+      })
       navigate("/")
     }else{
-      message.error("Tài khoản hoặc mật khẩu không chính xác")
+      notification.error(
+        {
+          message:'Thông báo lỗi',
+          description : 'Thông tin tài khoản hoặc mật khẩu không chính xác'
+        }
+      )
     }
     console.log('Success:', values);
   };
@@ -86,7 +94,7 @@ const LoginPage = () => {
           }}
         >
         
-            <Button style={{width: '200%', padding : '22px' , fontSize: '15px' , borderRadius : '2px'}} type="primary" htmlType="submit" loading={isSubmit} className='button'>
+            <Button style={{width: '200%', padding : '22px' , fontSize: '15px' , borderRadius : '5px'}} type="primary" htmlType="submit" loading={isSubmit} className='button'>
               LOGIN
             </Button>
         

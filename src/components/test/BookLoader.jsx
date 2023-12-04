@@ -2,7 +2,7 @@ import React from 'react'
 import { Col , Row , Skeleton } from 'antd'
 const BookLoader = () => {
   return (
-    <div >
+    <div>
         <Row gutter={[20, 20]}>
             <Col md={10} sm={0} xs={0}>
                 <Skeleton.Input

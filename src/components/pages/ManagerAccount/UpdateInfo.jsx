@@ -45,6 +45,10 @@ const UpdateInfo = () => {
 
     const onFinish = async (values) => {
         const { fullName, phone, _id } = values
+<<<<<<< HEAD
+=======
+        console.log(fullName , phone , _id);
+>>>>>>> test
         setIsSubmit(true)
         const res = await callUpdateUserInfo(_id, fullName, phone, userAvatar);
         console.log("Phản hồi API Cập nhật Thông tin Người dùng:", res);
