@@ -94,7 +94,7 @@ const LoginPage = () => {
           }}
         >
         
-            <Button style={{width: '200%', padding : '22px' , fontSize: '15px' , borderRadius : '2px'}} type="primary" htmlType="submit" loading={isSubmit} className='button'>
+            <Button style={{width: '200%', padding : '22px' , fontSize: '15px' , borderRadius : '5px'}} type="primary" htmlType="submit" loading={isSubmit} className='button'>
               LOGIN
             </Button>
         

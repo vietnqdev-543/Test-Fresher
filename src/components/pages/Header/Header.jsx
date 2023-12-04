@@ -1,13 +1,13 @@
-import { useSelector } from "react-redux"
-import { Avatar, Dropdown, Space, message, Badge, Popover } from 'antd';
-
+import { Avatar, Dropdown, Space, message, Badge, Popover, Modal } from 'antd';
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { UserOutlined, DownOutlined } from "@ant-design/icons";
 import { doLogoutAction } from "../../../redux/account/accountSlice";
 import { callLogout } from "../../services/api";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import './Header.scss'
+import ManagerAccount from "../ManagerAccount/ManagerAccount";
 
 
 const Header = () => {
@@ -26,6 +26,14 @@ const Header = () => {
       navigate("/")
     }
   }
+
+  //handle modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+
   const user = useSelector(state => state.account.user)
   const urlAvatar = `${import.meta.env.VITE_BACKEND_URL}/images/avatar/${user?.avatar}`
   const items = [
@@ -40,7 +48,7 @@ const Header = () => {
         type: 'divider',
       } : null,
     {
-      label: <label> Quản lí tài khoản</label>,
+      label: <label onClick={() => { showModal() }}> Quản lí tài khoản</label>,
       key: 'account',
     },
     {
@@ -65,6 +73,10 @@ const Header = () => {
     }
     return text;
   }
+
+
+
+
   const contentCart = () => {
     return (
       <div className="popover-cart-body">
@@ -86,17 +98,16 @@ const Header = () => {
 
           })}
         </div>
-        <button onClick={() => {navigate('./order')}}>View Cart</button>
-
+        <button onClick={() => { navigate('./order') }}>View Cart</button>
       </div>
 
     )
   }
-
   return (
+    
     <>
+      <ManagerAccount   isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
       <div className="header-container">
-
         <div className="header-item">
           <div className="nav-logo" >
             <Link style={{ color: 'white', textDecoration: 'none', }} to={"/"} > READCYCLE</Link>
@@ -126,7 +137,7 @@ const Header = () => {
                     size="small"
                     showZero
                   >
-                    <ShoppingCartOutlined onClick={()=>{navigate('/order')}} className="iconCart" />
+                    <ShoppingCartOutlined onClick={() => { navigate('/order') }} className="iconCart" />
                   </Badge>
                 </Popover>
               </div>

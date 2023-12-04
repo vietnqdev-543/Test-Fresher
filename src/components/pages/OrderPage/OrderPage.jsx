@@ -13,28 +13,7 @@ import Cart from './Cart';
 
 const OrderPage = (props) => {
     const carts = useSelector(state => state.order.carts);
-    const [totalPrice, setTotalPrice] = useState(0);
-    const [checkedItems, setCheckedItems] = useState([]);
-    const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (carts && carts.length > 0) {
-            let sum = 0;
-            checkedItems.forEach(itemId => {
-                const item = carts.find(cartItem => cartItem._id === itemId);
-                if (item) {
-                    sum += item.quantity * item.detail.price;
-                }
-            });
-            setTotalPrice(sum);
-        } else {
-            setTotalPrice(0);
-        }
-    }, [carts, checkedItems]);
-
-    
-
-   
     const [currentSteps, setCurrentSteps] = useState(0);
 
     return (
@@ -60,20 +39,19 @@ const OrderPage = (props) => {
             />
 
             <div className="order-container" style={{ maxWidth: 1440, margin: '0 auto' }}>
-               
                 {currentSteps === 0  && <Cart setCurrentSteps={setCurrentSteps} />}
-            {currentSteps === 1  && <Payment setCurrentSteps={setCurrentSteps}  carts = {carts} totalPrice={totalPrice}/>}
-            {currentSteps === 2  && <Result
-                status="success"
-                title="Order Successfully !"
-                extra={[
-                <Button type="primary" >
-                    View history
-                </Button>,
-                ]}
-            /> }
-               
-            </div>
+                {currentSteps === 1  && <Payment setCurrentSteps={setCurrentSteps}  />}
+                {currentSteps === 2  && <Result
+                    status="success"
+                    title="Order Successfully !"
+                    extra={[
+                    <Button type="primary" >
+                        View history
+                    </Button>,
+                    ]}
+                /> }
+                
+                </div>
         </div>
     )
 }

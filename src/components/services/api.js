@@ -74,3 +74,26 @@ return axios.post('api/v1/order', {
   ...data
 })
 }
+
+
+//update account
+export const callUpdateAvatar = (fileImg) => {
+  const bodyFormData = new FormData();
+  bodyFormData.append('fileImg', fileImg);
+  return axios({
+    method:"post",
+    url:"/api/v1/file/upload",
+    data : bodyFormData ,
+    headers : {
+      "Content-Type" : "multipart/form-data",
+      "upload-type" :"avatar"
+    }
+  })
+}
+
+
+export const callUpdateUserInfo = (_id , fullName , phone , avatar) => {
+  return axios.put(`/api/v1/user` , {
+    _id , phone , fullName , avatar 
+  })
+}

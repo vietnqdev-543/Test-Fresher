@@ -44,7 +44,19 @@ export const AccountSlide = createSlice({
           avatar: "",
           id: ""
         }
+      },
+      doUploadAvatarAction : (state ,action) => {
+        state.tempAvatar = action.payload.avatar
+        console.log("Trạng thái Hình đại diện mới:", action.payload.avatar);
+      },
+      doUpdateUserInfoAction : (state , action) => {
+        state.user.avatar = action.payload.avatar;
+        state.user.fullName = action.payload.fullName;
+        state.user.phone = action.payload.phone;
+        console.log("Trạng thái Hình đại diện mới:", action.payload.avatar);
+        
       }
+
   },
 
   extraReducers: (builder) => {
@@ -52,7 +64,7 @@ export const AccountSlide = createSlice({
   },
 });
 
-export const { doLoginAction ,doGetAccountAction , doLogoutAction} = AccountSlide.actions;
+export const { doLoginAction ,doGetAccountAction , doLogoutAction , doUpdateUserInfoAction , doUploadAvatarAction} = AccountSlide.actions;
 
 
 export default AccountSlide.reducer;
