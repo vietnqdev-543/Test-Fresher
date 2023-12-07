@@ -56,7 +56,7 @@ const Home = () => {
     </Carousel>
       </div> */}
       <div className="banner2">
-        <div>
+        <div className='des'>
           <h1 className="title" style={{ textAlign: 'center' }}>
             THE BOOK GUIDE <span className='primary-color'>ONLINE</span> BOOK STORE
           </h1>
@@ -94,7 +94,7 @@ const Home = () => {
       </div>
 
       <div className="banner3">
-        <div>
+        <div className='des'> 
           <h1 className="title" style={{ textAlign: 'center' }}>
             BEST <span className='primary-color'>TOP</span> SELLERS
           </h1>

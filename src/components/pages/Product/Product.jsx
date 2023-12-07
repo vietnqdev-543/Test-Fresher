@@ -81,9 +81,7 @@ const Product = () => {
         }
     }
 
-    const onFinish = (values) => {
-       
-       
+    const onFinish = (values) => {       
     }
 
     const items = [
@@ -135,7 +133,6 @@ const Product = () => {
         str = str.replace(/\u02C6|\u0306|\u031B/g, ""); // Â, Ê, Ă, Ơ, Ư
         return str;
     }
-
     const convertSlug = (str) => {
         str = nonAccentVietnamese(str);
         str = str.replace(/^\s+|\s+$/g, ''); // trim
@@ -259,10 +256,10 @@ const Product = () => {
                     <Row className='customize-row'>
                         {listBook?.map((item, index) => {
                             return (
-                                <div className="column"  key={`book-${index}`} onClick={() => handleRedirectBook(item)}>
+                                <div className="column"  key={`book-${index}`} onClick={() => handleRedirectBook(item)}>                               
                                     <div className='wrapper' >
                                         <div className='thumbnail'>
-                                        <img src={`${import.meta.env.VITE_BACKEND_URL}/images/book/${item.thumbnail}`} alt="thumbnail book" />
+                                            <img src={`${import.meta.env.VITE_BACKEND_URL}/images/book/${item.thumbnail}`} alt="thumbnail book" />
                                         </div>
                                         <div className='text' title={item.mainText}>{item.mainText} </div>
                                         <div className='price'>
@@ -273,6 +270,9 @@ const Product = () => {
                                             <span>Đã bán {item.sold}</span>
                                         </div>
                                     </div>
+
+                            
+                                
                                 </div>
 
                             )
